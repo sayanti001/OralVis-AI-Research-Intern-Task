@@ -416,5 +416,4 @@ else:
 
 * **Ultralytics YOLO** (v8/v11)
 * **YOLOv5** by Ultralytics
-* **YOLOv7** by WongKinYiu et al.
 
