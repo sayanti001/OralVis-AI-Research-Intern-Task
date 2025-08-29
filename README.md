@@ -104,7 +104,7 @@ names:
 ### Google Colab (recommended)
 
 * **Python:** 3.12 (Colab default)
-* **GPU:** T4/A100
+* **GPU:** T4
 * **Packages used here:**
 
   * Ultralytics `8.3.189`, NumPy `>=2.0,<2.4`, OpenCV-headless `4.10.0.84`, Matplotlib `3.9.0`
@@ -207,39 +207,6 @@ YOLO("runs/detect/tooth_yolov8s/weights/best.pt").val(
   --project /content/runs_v5 --name tooth_v5_test --exist-ok --plots --save-json
 ```
 
-### YOLOv7
-
-```python
-# Install
-%cd /content
-!rm -rf yolov7
-!git clone -q https://github.com/WongKinYiu/yolov7
-%cd yolov7
-!pip -q install -r requirements.txt "numpy>=2.0,<2.4" pycocotools matplotlib==3.9.0
-
-# Train (tiny for speed; swap to full cfg/weights for higher accuracy)
-!python train.py \
-  --workers 2 --device 0 --batch-size -1 \
-  --data /content/data.yaml \
-  --img 640 640 \
-  --cfg cfg/training/yolov7-tiny.yaml \
-  --weights yolov7-tiny.pt \
-  --name tooth_yolov7 \
-  --epochs 100 \
-  --project /content/runs_v7 --exist-ok
-
-# Evaluate on TEST
-!python test.py \
-  --data /content/data.yaml \
-  --img-size 640 \
-  --batch-size 16 \
-  --conf-thres 0.001 --iou-thres 0.6 \
-  --device 0 \
-  --weights /content/runs_v7/tooth_yolov7/weights/best.pt \
-  --task test \
-  --project /content/runs_v7 --name tooth_v7_test --exist-ok --save-json
-```
-
 
 ## Predictions (rendered images + labels)
 
@@ -264,17 +231,6 @@ YOLOv5:
   --project /content/runs_v5 --name pred_test --exist-ok --save-txt
 ```
 
-YOLOv7:
-
-```python
-%cd /content/yolov7
-!python detect.py \
-  --weights /content/runs_v7/tooth_yolov7/weights/best.pt \
-  --img-size 640 --conf 0.25 --iou 0.6 \
-  --source /content/dataset/images/test \
-  --project /content/runs_v7 --name pred_test --exist-ok --save-txt
-```
-
 
 ## Key Metrics & Confusion Matrix
 
@@ -285,7 +241,7 @@ YOLOv7:
   * `confusion_matrix.png`, `PR_curve.png`, `results.csv`
   * `metrics.results_dict` contains **precision**, **recall**, **mAP\@50**, **mAP\@50-95**
 
-**YOLOv5/YOLOv7:**
+**YOLOv5:**
 
 * `val.py`/`test.py` writes:
 
