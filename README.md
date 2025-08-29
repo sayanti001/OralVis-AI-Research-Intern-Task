@@ -352,15 +352,14 @@ else:
 .
 ├── data.yaml
 ├── README.md
-├── notebooks/
-│   └── tooth_detection_colab.ipynb
+├── tooth_detection_colab.ipynb
 ├── scripts/
 │   ├── split_dataset.py
 │   ├── eval_key_metrics.py
 │   └── make_report_docx.py
-├── runs_v5/        # (gitignored or saved to Drive)
+├── runs_v5/       
 ├── runs_v7/
-├── runs/           # YOLOv8 default
+├── runs/     
 └── runs_v11/
 ```
 
